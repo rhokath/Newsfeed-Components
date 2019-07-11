@@ -112,3 +112,44 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible
 
 */
+const articles = document.querySelector('.articles')
+data.map(data => {
+  console.log('creating article', data.date)
+  return articles.appendChild(createArticle(data.title, data.date, data.firstParagraph,
+    data.secondParagraph, data.thirdParagraph));
+})
+articles.appendChild(createArticle('a','b', 'c', 'd', 'e' ))
+function createArticle(title, date, firstParagraph, secondParagraph, thirdParagraph){
+  //define elements
+  const article = document.createElement('div');
+  const header = document.createElement('h2');
+  const dateInfo = document.createElement('p');
+  const paraOne = document.createElement('p');
+  const paraTwo = document.createElement('p');
+  const paraThree = document.createElement('p');
+  const button = document.createElement('span');
+  // Setup structure of elements
+  article.appendChild(header);
+  article.appendChild(dateInfo);
+  article.appendChild(paraOne);
+  article.appendChild(paraTwo);
+  article.appendChild(paraThree);
+  article.appendChild(button);
+  // Setup class names
+  article.classList.add('article');
+  dateInfo.classList.add('date');
+  button.classList.add('expandButton');
+  // Set text content
+  button.textContent = 'expand';
+  header.textContent = title;
+  dateInfo.textContent = date;
+  paraOne.textContent = firstParagraph;
+  paraTwo.textContent = secondParagraph;
+  paraThree.textContent = thirdParagraph;
+  // Add eventListener to expand button
+  button.addEventListener('click', event => {
+    article.classList.toggle('article-open')
+  })
+
+  return article;
+}
